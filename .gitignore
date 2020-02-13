@@ -1,2 +1,8 @@
 .idea
+frontend/node_modules
+backend/node_modules
+backend/build
+backend/exports
+backend/.cache
+backend/.tmp
 

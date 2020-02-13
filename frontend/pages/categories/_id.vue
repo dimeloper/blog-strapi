@@ -1,30 +1,32 @@
 <template>
   <div>
-    <div class="uk-section">
-      <div class="uk-container uk-container-large">
-        <h1>Dimeloper blog</h1>
+    <client-only>
+      <div class="uk-section">
+        <div class="uk-container uk-container-large">
+          <h1>{{ category.name }}</h1>
 
-        <Articles :articles="articles"></Articles>
+          <Articles :articles="category.articles || []"></Articles>
+        </div>
       </div>
-    </div>
+    </client-only>
   </div>
 </template>
 
 <script>
-import articlesQuery from '~/apollo/queries/article/articles';
+import articlesQuery from '~/apollo/queries/article/articles-categories';
 import Articles from '~/components/Articles';
 
 export default {
   data() {
     return {
-      articles: []
+      category: []
     };
   },
   components: {
     Articles
   },
   apollo: {
-    articles: {
+    category: {
       prefetch: true,
       query: articlesQuery,
       variables() {

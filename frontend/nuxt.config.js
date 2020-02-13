@@ -14,7 +14,13 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Staatliches'
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
@@ -23,22 +29,36 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    'uikit/dist/css/uikit.min.css',
+    'uikit/dist/css/uikit.css',
+    '@assets/css/main.css'
+  ],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/uikit.js', ssr: false }],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
-  ],
+  buildModules: [],
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ['@nuxtjs/apollo', '@nuxtjs/markdownit'],
+  markdownit: {
+    preset: 'default',
+    linkify: true,
+    breaks: true,
+    injected: true
+  },
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:1337/graphql'
+      }
+    }
+  },
   /*
    ** Build configuration
    */
@@ -48,4 +68,4 @@ export default {
      */
     extend(config, ctx) {}
   }
-}
+};
